@@ -38,3 +38,11 @@ include는 PHP에서 다른 PHP 파일을 코드 안으로 불러와서 사용�
 
 * [php.net - include](http://php.net/manual/kr/function.include.php)
 
+## preg_match
+```php
+  ...
+  if(preg_match('/prob|_|\.|\(\)/i', $_GET[id])) exit("No Hack ~_~"); // do not try to attack another table, database!
+  if(preg_match('/prob|_|\.|\(\)/i', $_GET[pw])) exit("No Hack ~_~");
+  ...
+```
+코드를 살펴보면 preg_match 함수를 통해 GET 방식으로 입력받은 id와 pw 문자열을 비교하게 되는데, 이 때 입력받은 문자열에 `prob`, `_`, `.`, `\`, `()` 가 하나라도 포함되면 `No hack ~_~` 이라고 화면에 출력하면서 문제 풀이를 실패했다는 것을 알린다.
