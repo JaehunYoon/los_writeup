@@ -19,6 +19,7 @@ gremlin 단계에서 문제를 해결해야 할 php 소스코드는 다음과 �
   highlight_file(__FILE__);
 ?>
 ```
+## include
 ```php
   include "./config.php";
   login_chk();
@@ -30,3 +31,10 @@ gremlin 단계에서 문제를 해결해야 할 php 소스코드는 다음과 �
 PHP 코드 중 include 부문의 라인이다.
 include는 PHP에서 다른 PHP 파일을 코드 안으로 불러와서 사용할 때에 사용된다.
 위의 login_chk(), dbconnect(), solve() 함수는 공개된 PHP 코드 내에서 함수의 정의 부분이 보이지 않기 때문에, include를 통해 config.php 라는 외부 PHP 파일에서 호출된다는 것을 알 수 있다.
+
+#### include 알아보기
+
+* [생활코딩 - PHP / include와 namespace](https://opentutorials.org/course/62/5138)
+
+* [php.net - include](http://php.net/manual/kr/function.include.php)
+
