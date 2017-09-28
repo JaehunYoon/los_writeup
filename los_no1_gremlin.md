@@ -75,3 +75,14 @@ http://los.eagle-jump.org/gremlin_***.php?id=\ …
 * POST 방식은 GET과는 다르게 데이터를 URL에 포함시키지 않고 전송할 수 있다.
 * [생활코딩 - 입출력 그리고 폼과 HTTP](https://opentutorials.org/course/62/5125)
 
+```php
+<?php
+…
+$query = "select id from prob_gremlin where id='{$_GET[id]}' and pw='{$_GET[pw]}'";
+  echo "<hr>query : <strong>{$query}</strong><hr><br>";
+  $result = @mysql_fetch_array(mysql_query($query));
+  if($result['id']) solve("gremlin");
+  highlight_file(__FILE__);
+?>
+```
+위의 코드를 보면 `$_GET` 방식으로 받은 id와 pw가 `$_query`에 직접 삽입되는 것을 알 수 있다. 
