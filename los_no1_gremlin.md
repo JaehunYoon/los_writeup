@@ -77,12 +77,41 @@ http://los.eagle-jump.org/gremlin_***.php?id=\ …
 
 ```php
 <?php
-…
-$query = "select id from prob_gremlin where id='{$_GET[id]}' and pw='{$_GET[pw]}'";
+  …
+  $query = "select id from prob_gremlin where id='{$_GET[id]}' and pw='{$_GET[pw]}'";
   echo "<hr>query : <strong>{$query}</strong><hr><br>";
   $result = @mysql_fetch_array(mysql_query($query));
+  …
+?>
+```
+위의 코드를 보면 `$_GET` 방식으로 받은 id와 pw가 `$_query`에 직접 삽입되는 것을 알 수 있다. 
+
+* `mysql_auery($query)` : query에 넣어둔 값을 $result 변수에 저장한다.
+* `mysql_fetch_array()` : 연관 색인 및 숫자 색인으로 된 배열로 결과 행을 반환한다.
+
+#### 문제 해결 조건
+```php
   if($result['id']) solve("gremlin");
   highlight_file(__FILE__);
 ?>
 ```
-위의 코드를 보면 `$_GET` 방식으로 받은 id와 pw가 `$_query`에 직접 삽입되는 것을 알 수 있다. 
+코드의 if문을 해석해보면, id값이 존재하면 `solve`, `highlight_file` 함수가 실행되고 문제 풀이를 성공하게 된다.
+
+즉, 그냥 쿼리문을 실행하기만 하면 문제를 풀 수 있는 것이다.
+
+## Solution
+
+```
+  http://los.eagle-jump.org/gremlin_***.php?id=' or 1=1 -- -
+```
+`&_GET`으로 정보를 전송하기 위해서 URL 뒤에 쿼리스트링을 추가한다.
+id에 '를 넣어 id 입력을 마치고 `or 1=1 --`라는 기본적인 SQL injection 문법을 이용하여 문제 풀이를 성공할 수 있다.
+
+```sql
+  select id from prob_gremlin where id='' or 1=1 -- -'
+```
+* `or 1=1` 은 SQL 문의 WHERE 절을 무력화시키는 기본적인 삽입 문법인데, `or 1=1` 이라는 것이 WHERE절을 항상 참으로 만들어 `prob_gremlin`의 모든 id를 불러온다.
+
+* `or 1=1` 뒤의 `--`는 뒤에 오는 모든 내용들을 무력화시키는 주석문이기 때문에 pw를 입력하지 않아도 된다.
+
+* `-- - `에서 주석 처리 부분만 입력하면 정상적으로 주석 처리가 되지 않기 때문에 `--` 뒤에 공백 후 `-`를 추가했다. 그리고, `--` 뒤에 공백이나 #만 추가하면 처리과정에서 생략이 되기 때문에 %20을 직접 입력하거나 공백 후 아무 문자를 삽입해야한다.
