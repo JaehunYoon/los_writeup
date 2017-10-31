@@ -1,4 +1,4 @@
-# Lord of SQL Injection No.1 - Gremlin
+﻿# Lord of SQL Injection No.1 - Gremlin
 
 LOS Gremlin 문제는 기본적인 SQL Injection 문법으로 SQL문을 우회하도록 유도한 문제이다.
 
@@ -102,16 +102,16 @@ http://los.eagle-jump.org/gremlin_***.php?id=\ …
 ## Solution
 
 ```
-  http://los.eagle-jump.org/gremlin_***.php?id=' or 1=1 -- -
+  http://los.eagle-jump.org/gremlin_***.php?id=' or 1=1 -- ;
 ```
 `&_GET`으로 정보를 전송하기 위해서 URL 뒤에 쿼리스트링을 추가한다.
 id에 '를 넣어 id 입력을 마치고 `or 1=1 --`라는 기본적인 SQL injection 문법을 이용하여 문제 풀이를 성공할 수 있다.
 
 ```sql
-  select id from prob_gremlin where id='' or 1=1 -- -'
+  select id from prob_gremlin where id='' or 1=1 -- ;'
 ```
 * `or 1=1` 은 SQL 문의 WHERE 절을 무력화시키는 기본적인 삽입 문법인데, `or 1=1` 이라는 것이 WHERE절을 항상 참으로 만들어 `prob_gremlin`의 모든 id를 불러온다.
 
 * `or 1=1` 뒤의 `--`는 뒤에 오는 모든 내용들을 무력화시키는 주석문이기 때문에 pw를 입력하지 않아도 된다.
 
-* `-- - `에서 주석 처리 부분만 입력하면 정상적으로 주석 처리가 되지 않기 때문에 `--` 뒤에 공백 후 `-`를 추가했다. 그리고, `--` 뒤에 공백이나 #만 추가하면 처리과정에서 생략이 되기 때문에 %20을 직접 입력하거나 공백 후 아무 문자를 삽입해야한다.
+* `-- ; `에서 주석 처리 부분만 입력하면 정상적으로 주석 처리가 되지 않기 때문에 `--` 뒤에 공백 후 `;`를 추가했다. 그리고, `--` 뒤에 공백이나 #만 추가하면 처리과정에서 생략이 되기 때문에 %20을 직접 입력하거나 공백 후 아무 문자를 삽입해야한다.
