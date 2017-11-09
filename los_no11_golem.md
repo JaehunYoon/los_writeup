@@ -98,6 +98,14 @@ Blind SQL Injection을 하기 위해 사용한 Python 코드는 형태가 거의
 두번째 `for`문에서는 `or`, `and` 연산을 우회하기 위해 `||`와 `&&`를 사용하였다.
 `&&`는 URL에 직접 대입하면 안되지만, `quote(add_url)`가 실행되면 `URL Encoding`을 수행하기 때문에 서버 상에서는 `%26%26` 상태로 삽입되었다고 볼 수 있다.
 
+`substr()` 을 우회하는 방법은 `substring()` 을 사용하거나 `MID()`를 사용하여 `substr()`을 우회하는 방법이 있다.
+
+#### MID
+
+* [MySQL - MID 함수, instr 함수](http://www.spatium.co.kr/languages/content.php?chno=5&bno=37)
+
+* [SQL MID() 함수](http://makand.tistory.com/entry/SQL-MID-%ED%95%A8%EC%88%98)
+
 모든 `for`문이 끝나면 `pw`값은 `88e3137f` 가 나오게 된다.
 
 ```
