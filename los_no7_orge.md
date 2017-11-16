@@ -1,4 +1,4 @@
-# Lord of SQL Injection No.7 Orge
+﻿# Lord of SQL Injection No.7 Orge
 
 Orge 문제는 `or`, `and`를 우회하여 `Blind SQL Injection`을 하도록 유도한 문제이다.
 
@@ -91,8 +91,7 @@ print("Password : " + result)
 for i in range(1,10):
 ...
 ```
-위의 첫 `for`문에서 DB에 있는 `pw`값의 길이를 찾는다.
-`no.4 orc` 에서는 일일이 `length` 함수를 URL에 직접 대입해가며 찾아갔는데, 이 후에는 문제의 `pw` 길이가 항상 8이 아닐 수도 있다는 가정하에 코드를 통해 `pw` 길이를 찾도록 구현하였다.
+첫 `for`문에서 DB에 있는 `pw`값의 길이를 찾는다.
 
 `"length(pw)={}".format(i)` 를 통해 `pw` 길이가 일치하면 `Hello admin`을 출력하기 때문에 이를 `find` 함수로 찾게 되면 `pwlen`에 그 값을 저장하여 다음 `for`문을 진행하도록 하였다.
 
