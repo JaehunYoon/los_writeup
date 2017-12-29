@@ -23,6 +23,6 @@
 <[Problem 20 - Dragon](https://github.com/JaehunYoon/los_writeup/blob/master/los_no20_dragon.md)><br/>
 <[Problem 21 - Iron Golem](https://github.com/JaehunYoon/los_writeup/blob/master/los_no21_iron_golem.md)><br/>
 <[Problem 22 - Dark eyes](https://github.com/JaehunYoon/los_writeup/blob/master/los_no22_dark_eyes.md)><br/>
-<Problem 23 - Hell Fire><br/>
+<~~[Problem 23 - Hell Fire](https://github.com/JaehunYoon/los_writeup/blob/master/Writeup/los_no23_hell_fire.md)~~><br/>
 <Problem 24 - Evil Wizard><br/>
 <Problem 25 - Umaru>
