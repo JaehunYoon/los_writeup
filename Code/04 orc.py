@@ -10,7 +10,7 @@ __author__ = "goodasd123@naver.com - h4lo"
 def req(query):
     re = urllib.request.Request(query)
     re.add_header('User-Agent', 'Mozilla/5.0')
-    re.add_header('Cookie', 'PHPSESSID=utjhn719gdscu8g6jbq3fln5a4')
+    re.add_header('Cookie', 'PHPSESSID=igi74q68mt3cb9drthge40a3s1')
     res = urllib.request.urlopen(re)
     return res
 
